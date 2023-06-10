@@ -7,18 +7,18 @@ declare const SydneyFullScreenConv: {
 };
 
 /**
- * 更有创造力 | 更平衡 | 更精确
+ * 更有創造力 | 更平衡 | 更精確
  */
 type ToneType = 'Creative' | 'Balanced' | 'Precise';
 
 interface BingMessage {
   /**
-   * 消息内容
+   * 消息內容
    */
   text: string;
 
   /**
-   * 还可以图片链接？
+   * 還可以圖片鏈接？
    */
   imageUrl?: string;
 }
@@ -69,7 +69,7 @@ interface TextMessageModel {
 }
 
 interface BingChat {
-  // 是否请求响应中
+  // 是否請求響應中
   isRequestPending: boolean;
   api: {
     bing: {
@@ -81,11 +81,11 @@ interface BingChat {
       };
       conversation: {
         /**
-         * 创建请求
+         * 創建請求
          */
         create: (O) => {};
         /**
-         * 聊天记录
+         * 聊天記錄
          */
         getChats: (O) => {};
       };
@@ -98,7 +98,7 @@ interface BingChat {
      * 聊天完成
      * @param O
      * @returns
-     */
+    */
     complete: (O) => Promise<unknown>;
     error: (O) => Promise<unknown>;
   };
@@ -127,7 +127,7 @@ type PublicSubscribeEvent = (callback: Function, thisArgs, disposables) => {};
 
 declare const CIB: {
   /**
-   * 微软 bing 版本信息
+   * 微軟 bing 版本信息
    */
   version: {
     buildTimestamp: string;
@@ -135,7 +135,7 @@ declare const CIB: {
     version: string;
   };
   /**
-   * 整个必应聊天 cib-serp
+   * 整個必應聊天 cib-serp
    */
   vm: {
     errorService: {
@@ -144,51 +144,51 @@ declare const CIB: {
       onChatWarningStateChange: PublicSubscribeEvent;
     };
     /**
-     * 是否手机版
+     * 是否手機版
      */
     isMobile: boolean;
     actionBar: {
       /**
-       * 输入框
+       * 輸入框
        */
       input: HTMLTextAreaElement;
       /**
-       * 输入框文本 赋值即输入问题
+       * 輸入框文本 賦值即輸入問題
        */
       inputText: string;
       /**
-       * 自动建议的前置文本
+       * 自動建議的前置文本
        */
       autoSuggestPrependedText: string;
       /**
-       * 自动建议附加文本
+       * 自動建議附加文本
        */
       autoSuggestAppendedText: string;
       /**
-       * 提交当前输入框问题
+       * 提交當前輸入框問題
        */
       submitInputText: () => {};
     };
     conversation: BingConversation;
     /**
-     * 历史记录
+     * 歷史記錄
      */
     sidePanel: {
       /**
-       * M 是否显示
+       * M 是否顯示
        */
       isVisibleMobile: boolean;
       /**
-       * PC 是否显示  get shouldShowPanel
+       * PC 是否顯示  get shouldShowPanel
        */
       isVisibleDesktop: boolean;
     };
     /**
-     * 选择对话样式
+     * 選擇對話樣式
      */
     toneSelector: {
       /**
-       * 更有创造力 | 更平衡 | 更精确  -- 直接赋值即可切换 set tone(O)
+       * 更有創造力 | 更平衡 | 更精確  -- 直接賦值即可切換 set tone(O)
        */
       tone: ToneType;
     };
@@ -198,8 +198,8 @@ declare const CIB: {
       baseUrl: string;
     };
     edgeAction: {
-      /**
-       * hook 接收消息，需启用
+   /**
+       * hook 接收消息，需啟用
        */
       hookIncomingMessage: (message) => boolean;
       isEnabled: boolean;
@@ -207,25 +207,25 @@ declare const CIB: {
     features: {
       enableThreads: boolean;
       /**
-       * 获取聊天历史
+       * 獲取聊天歷史
        */
       enableGetChats: boolean;
     };
     sydney: {
       baseUrl: string;
       /**
-       * 安全域名？移除 localhost，开发即可 create
+       * 安全域名？移除 localhost，開發即可 create
        */
       hostnamesToBypassSecureConnection: string[];
       expiryInMinutes: number;
     };
     messaging: {
       /**
-       * 单次最大对话数
+       * 單次最大對話數
        */
       maxTurnsPerConversation: number;
       /**
-       * 打字机速度调节，默认 1000 / 15 = 55 （每秒15字？）
+       * 打字機速度調節，默認 1000 / 15 = 55 （每秒15字？）
        */
       messageBufferWorkerStreamDelayMS: number;
     };
@@ -239,11 +239,11 @@ declare const CIB: {
     resetConversation: () => {};
 
     /**
-     * 发送消息
-     * @param O 消息内容
-     * @param B 默认 false ，则发送消息
-     * @param G 默认 chat 消息类型
-     * @param U 默认 Keyboard 似乎只是区分输入及语音
+     * 發送消息
+     * @param O 消息內容
+     * @param B 默認 false ，則發送消息
+     * @param G 默認 chat 消息類型
+     * @param U 默認 Keyboard 似乎只是區分輸入及語音
      * @returns
      */
     sendMessage: (O: BingMessage, B?: boolean, G?: BingMessageType, U?: 'Keyboard' | 'Speech') => {};
