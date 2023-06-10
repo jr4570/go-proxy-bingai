@@ -7,9 +7,9 @@ import (
 )
 
 type SysConfig struct {
-	// 是否系统配置 cookie
+	// 是否系統配置 cookie
 	IsSysCK bool `json:"isSysCK"`
-	// 是否已授权
+	// 是否已授權
 	IsAuth bool `json:"isAuth"`
 }
 
