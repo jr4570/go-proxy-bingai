@@ -1,14 +1,14 @@
-/* 移除顶部背景遮挡 */
+/* 移除頂部背景遮擋 */
 .scroller>.top {
   display: none !important;
 }
 
-/* 移除顶部边距 */
+/* 移除頂部邊距 */
 .scroller>.scroller-positioner>.content {
   padding-top: 0 !important;
 }
 
-/* 聊天记录 */
+/* 聊天記錄 */
 .scroller .side-panel {
   position: fixed;
   right: 10px;
