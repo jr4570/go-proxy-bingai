@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // 禁用预加载，修复tailwind样式 与 naive-ui button等样式等冲突问题
+  // 禁用預加載，修復tailwind樣式 與 naive-ui button等樣式等衝突問題
   corePlugins: {
     preflight: false,
   },
