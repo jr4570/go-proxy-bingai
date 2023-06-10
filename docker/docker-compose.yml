@@ -2,11 +2,11 @@ version: '3'
 
 services:
   go-proxy-bingai:
-    # 镜像名称
+    # 鏡像名稱
     image: adams549659584/go-proxy-bingai
-    # 容器名称
+    # 容器名稱
     container_name: go-proxy-bingai  
-    # 自启动
+    # 自啟動
     restart: unless-stopped
     ports:
       - 8080:8080
@@ -18,16 +18,16 @@ services:
     #   - Go_Proxy_BingAI_USER_TOKEN_2=xxx
   
 #   go-proxy-bingai:
-#     # 镜像名称
+#     # 鏡像名稱
 #     image: adams549659584/go-proxy-bingai
-#     # 容器名称
+#     # 容器名稱
 #     container_name: go-proxy-bingai
 #     build:
 #       context: ../
 #       dockerfile: docker/Dockerfile      
-#     # 自启动
+#     # 自啟動
 #     restart: unless-stopped
-#     # 加入指定网络
+#     # 加入指定網絡
 #     networks:
 #       - MyNetwork    
 #     ports:
@@ -40,4 +40,3 @@ services:
 # networks:
 #   MyNetwork:
 #     external: true
-
