@@ -1254,12 +1254,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   display: none !important;\r
 }\r
 \r
-/* 移除顶部边距 */\r
+/* 移除頂部邊距 */\r
 .scroller>.scroller-positioner>.content {\r
   padding-top: 0 !important;\r
 }\r
 \r
-/* 聊天记录 */\r
+/* 聊天記錄 */\r
 .scroller .side-panel {\r
   position: fixed;\r
   right: 10px;\r
