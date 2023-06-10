@@ -219,31 +219,31 @@ var IP_RANGE = [][]string{
 	{"15.248.72.0", "16.0.89.255"},     //528,896
 }
 
-// 获取真实有效的随机IP
+// 獲取真實有效的隨機IP
 func GetRandomIP() string {
 	seed := time.Now().UnixNano()
 	rng := rand.New(rand.NewSource(seed))
 
-	// 生成随机索引
+	// 生成隨機索引
 	randomIndex := rng.Intn(len(IP_RANGE))
 
-	// 获取随机 IP 地址范围
+	// 獲取隨機 IP 地址範圍
 	startIP := IP_RANGE[randomIndex][0]
 	endIP := IP_RANGE[randomIndex][1]
 
-	// 将起始 IP 地址转换为整数形式
+	// 將起始 IP 地址轉換為整數形式
 	startIPInt := ipToUint32(net.ParseIP(startIP))
-	// 将结束 IP 地址转换为整数形式
+	// 將結束 IP 地址轉換為整數形式
 	endIPInt := ipToUint32(net.ParseIP(endIP))
 
-	// 生成随机 IP 地址
+	// 生成隨機 IP 地址
 	randomIPInt := rng.Uint32()%(endIPInt-startIPInt+1) + startIPInt
 	randomIP := uint32ToIP(randomIPInt)
 
 	return randomIP
 }
 
-// 将 IP 地址转换为 uint32
+// 將 IP 地址轉換為 uint32
 func ipToUint32(ip net.IP) uint32 {
 	ip = ip.To4()
 	var result uint32
@@ -254,7 +254,7 @@ func ipToUint32(ip net.IP) uint32 {
 	return result
 }
 
-// 将 uint32 转换为 IP 地址
+// 將 uint32 轉換為 IP 地址
 func uint32ToIP(intIP uint32) string {
 	ip := fmt.Sprintf("%d.%d.%d.%d", byte(intIP>>24), byte(intIP>>16), byte(intIP>>8), byte(intIP))
 	return ip
