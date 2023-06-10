@@ -36,7 +36,7 @@ const navType = {
 const navConfigs = [
   {
     key: navType.github,
-    label: '开源地址',
+    label: '開源地址',
     url: 'https://github.com/adams549659584/go-proxy-bingai',
   },
   {
@@ -45,28 +45,28 @@ const navConfigs = [
   },
   {
     key: navType.chatService,
-    label: '服务选择',
+    label: '服務選擇',
   },
   {
     key: navType.promptStore,
-    label: '提示词库',
+    label: '提示詞庫',
   },
   {
     key: navType.setToken,
-    label: '设置用户',
+    label: '設置用戶',
   },
   {
     key: navType.compose,
-    label: '撰写文章',
+    label: '撰寫文章',
     url: '/web/compose.html',
   },
   {
     key: navType.createImage,
-    label: '图像创建',
+    label: '圖像創建',
   },
   {
     key: navType.reset,
-    label: '一键重置',
+    label: '一鍵重置',
   },
 ];
 
@@ -78,7 +78,7 @@ const handleSelect = (key: string) => {
   switch (key) {
     case navType.version:
       {
-        message.success(`当前版本号为：${__APP_INFO__.version}`);
+        message.success(`當前版本號為：${__APP_INFO__.version}`);
       }
       break;
     case navType.chatService:
@@ -101,7 +101,7 @@ const handleSelect = (key: string) => {
     case navType.createImage:
       {
         if (!userStore.sysConfig?.isSysCK && !userStore.getUserToken()) {
-          message.warning('体验画图功能需先登录');
+          message.warning('體驗畫圖功能需先登錄');
         }
         isShowCreateImageModal.value = true;
       }
@@ -124,7 +124,7 @@ const resetCache = async () => {
 
 const saveUserToken = () => {
   if (!userToken.value) {
-    message.warning('请先填入用户 Cookie');
+    message.warning('請先填入用戶 Cookie');
     return;
   }
   userStore.saveUserToken(userToken.value);
@@ -134,16 +134,16 @@ const saveUserToken = () => {
 
 <template>
   <NDropdown v-if="isMobile()" class="select-none" :show="isShowMore" :options="navConfigs" :render-label="renderDropdownLabel" @select="handleSelect">
-    <NImage class="fixed top-6 right-4 cursor-pointer z-50" :src="settingSvgUrl" alt="设置菜单" :preview-disabled="true" @click="isShowMore = !isShowMore"></NImage>
+    <NImage class="fixed top-6 right-4 cursor-pointer z-50" :src="settingSvgUrl" alt="設置菜單" :preview-disabled="true" @click="isShowMore = !isShowMore"></NImage>
   </NDropdown>
   <NDropdown v-else class="select-none" trigger="hover" :options="navConfigs" :render-label="renderDropdownLabel" @select="handleSelect">
-    <NImage class="fixed top-6 right-6 cursor-pointer z-50" :src="settingSvgUrl" alt="设置菜单" :preview-disabled="true"></NImage>
+    <NImage class="fixed top-6 right-6 cursor-pointer z-50" :src="settingSvgUrl" alt="設置菜單" :preview-disabled="true"></NImage>
   </NDropdown>
   <NModal v-model:show="isShowSetTokenModal" preset="dialog" :show-icon="false">
     <template #header>
-      <div class="text-3xl py-2">设置用户</div>
+      <div class="text-3xl py-2">設置用戶</div>
     </template>
-    <NInput size="large" v-model:value="userToken" type="text" placeholder="用户 Cookie ,仅需要 _U 的值" />
+    <NInput size="large" v-model:value="userToken" type="text" placeholder="用戶 Cookie ,僅需要 _U 的值" />
     <template #action>
       <NButton size="large" @click="isShowSetTokenModal = false">取消</NButton>
       <NButton ghost size="large" type="info" @click="saveUserToken">保存</NButton>
@@ -151,11 +151,11 @@ const saveUserToken = () => {
   </NModal>
   <NModal v-model:show="isShowClearCacheModal" preset="dialog" :show-icon="false">
     <template #header>
-      <div class="text-xl py-2">将删除包括 Cookie 等的所有缓存？</div>
+      <div class="text-xl py-2">將刪除包括 Cookie 等的所有緩存？ </div>
     </template>
     <template #action>
       <NButton size="large" @click="isShowClearCacheModal = false">取消</NButton>
-      <NButton ghost size="large" type="error" @click="resetCache">确定</NButton>
+      <NButton ghost size="large" type="error" @click="resetCache">確定</NButton>
     </template>
   </NModal>
   <CreateImage v-model:show="isShowCreateImageModal" />
