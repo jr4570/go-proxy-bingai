@@ -56,7 +56,7 @@ _G = {
   DA: 'PUSE01',
   SUIH: 'BtAuR605UV0NIg083Tp9HA',
   adc: 'b_ad',
-  // logsb 启用 sendBeacon 推送日志，并在 sendBeacon 阻止
+// logsb 啟用 sendBeacon 推送日誌，並在 sendBeacon 阻止
   EF: { cookss: 1, bmcov: 1, crossdomainfix: 1, bmasynctrigger: 1, bmasynctrigger3: 1, newtabsloppyclick: 1, chevroncheckmousemove: 1, logsb: 1 },
   gpUrl: '/fd/ls/GLinkPing.aspx?',
 };
