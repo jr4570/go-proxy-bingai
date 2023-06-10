@@ -11,7 +11,7 @@ export enum ApiResultCode {
   OK = 200,
 
   /**
-   * 未授权
+   * 未授權
    */
   Unauthorized = 401,
 }
