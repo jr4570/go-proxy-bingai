@@ -120,13 +120,13 @@ const hackStyle = () => {
   // 居中
   serpEle?.setAttribute('alignment', 'center');
   const conversationEle = serpEle?.shadowRoot?.querySelector('cib-conversation') as HTMLElement;
-  // todo 反馈暂时无法使用，先移除
+  // todo 反饋暫時無法使用，先移除
   const welcomeEle = conversationEle?.shadowRoot?.querySelector('cib-welcome-container');
   welcomeEle?.shadowRoot?.querySelector('.learn-tog-item')?.remove();
   serpEle?.shadowRoot?.querySelector('cib-serp-feedback')?.remove();
   if (isMobile()) {
     welcomeEle?.shadowRoot?.querySelector('.container-item')?.remove();
-    CIB.vm.actionBar.input.placeholder = '有问题尽管问我...（"/" 触发提示词）';
+    CIB.vm.actionBar.input.placeholder = '有問題儘管問我...（"/" 觸發提示詞）';
   }
   // 加入css
   const conversationStyleEle = document.createElement('style');
@@ -142,7 +142,7 @@ const initChatPrompt = () => {
   const actionBarEle = document.querySelector('#b_sydConvCont > cib-serp')?.shadowRoot?.querySelector('#cib-action-bar-main') as IActionBarElement;
   const oldHandleInputTextKey = actionBarEle.handleInputTextKey;
   actionBarEle.handleInputTextKey = function (ev: KeyboardEvent) {
-    // 有提示词时，优先选择提示词
+    // 有提示詞時，優先選擇提示詞
     if (ev.key === 'Enter' && isShowChatPrompt.value) {
       return;
     }
@@ -188,17 +188,17 @@ const handleInputTextChanged = (ev: Event) => {
 };
 
 const handleInputFocus = (ev: FocusEvent) => {
-  // console.log('获取焦点:', ev);
+  // console.log('獲取焦點:', ev);
 };
 const handleInputBlur = (ev: FocusEvent) => {
-  // 简单解决失焦与点击冲突
+  // 簡單解決失焦與點擊衝突
   setTimeout(() => {
     isShowChatPrompt.value = false;
   }, 200);
 };
 
 const handleInputTextKey = (ev: KeyboardEvent) => {
-  switch (ev.key) {
+ switch (ev.key) {
     case 'ArrowUp':
       {
         // ev.preventDefault();
@@ -249,7 +249,7 @@ const handlePromptListScroll = () => {
   setTimeout(() => {
     if (isPromptScrolling.value === true) {
       isPromptScrolling.value = false;
-      // 滚动结束设置选中
+      // 滾動結束設置選中
       const offset = scrollbarRef.value?.getOffset() || 0;
       selectedPromptIndex.value = Math.round(offset / promptItemHeight);
     }
@@ -258,18 +258,18 @@ const handlePromptListScroll = () => {
 
 const auth = async () => {
   if (!authKey.value) {
-    message.error('请先输入授权码');
+    message.error('請先輸入授權碼');
     return;
   }
   isAuthBtnLoading.value = true;
   userStore.setAuthKey(authKey.value);
   const res = await userStore.getSysConfig();
   if (res.data.isAuth) {
-    message.success('授权成功');
+    message.success('授權成功');
     isShowUnauthorizedModal.value = false;
     afterAuth(res.data);
   } else {
-    message.error('授权码有误');
+    message.error('授權碼有誤');
   }
   isAuthBtnLoading.value = false;
 };
@@ -297,22 +297,22 @@ const auth = async () => {
         :keeps="10"
         @scroll="handlePromptListScroll"
       />
-      <NEmpty v-else class="bg-white w-full max-w-[1060px] max-h-[390px] rounded-xl py-6" description="暂未设置提示词数据">
-        <template #extra>
-          <NButton secondary type="info" @click="isShowPromptSotre = true">去提示词库添加</NButton>
+      <NEmpty v-else class="bg-white w-full max-w-[1060px] max-h-[390px] rounded-xl py-6" description="暫未設置提示詞數據">
+       <template #extra>
+          <NButton secondary type="info" @click="isShowPromptSotre = true">去提示詞庫添加</NButton>
         </template>
       </NEmpty>
     </div>
   </main>
   <footer>
-    <!-- 服务器选择 -->
+    <!-- 服務器選擇 -->
     <ChatServiceSelect />
-    <!-- 授权 -->
+    <!-- 授權 -->
     <div v-if="isShowUnauthorizedModal" class="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black/40 z-50">
-      <NResult class="box-border w-11/12 lg:w-[400px] px-4 py-4 bg-white rounded-md" status="403" title="401 未授权">
+      <NResult class="box-border w-11/12 lg:w-[400px] px-4 py-4 bg-white rounded-md" status="403" title="401 未授權">
         <template #footer>
-          <NInput class="w-11/12" v-model:value="authKey" type="password" placeholder="请输入授权码" maxlength="60" clearable></NInput>
-          <n-button class="mt-4" secondary type="info" :loading="isAuthBtnLoading" @click="auth">授权</n-button>
+          <NInput class="w-11/12" v-model:value="authKey" type="password" placeholder="請輸入授權碼" maxlength="60" clearable></NInput>
+          <n-button class="mt-4" secondary type="info" :loading="isAuthBtnLoading" @click="auth">授權</n-button>
         </template>
       </NResult>
     </div>
