@@ -14,13 +14,13 @@ const { promptList, optPromptConfig } = storeToRefs(promptStore);
 
 const delPrompt = (item: IPrompt) => {
   promptList.value = promptList.value.filter((x) => x.act !== item.act && x.prompt !== item.prompt);
-  messgae.success('删除提示词成功');
+  messgae.success('刪除提示詞成功');
 };
 
 const showEditPromptPop = (item: IPrompt) => {
   optPromptConfig.value.isShow = true;
   optPromptConfig.value.type = 'edit';
-  optPromptConfig.value.title = '编辑提示词';
+  optPromptConfig.value.title = '編輯提示詞';
   optPromptConfig.value.tmpPrompt = item;
   optPromptConfig.value.newPrompt = { ...item };
 };
@@ -33,8 +33,8 @@ const showEditPromptPop = (item: IPrompt) => {
         <span class="inline-block max-w-[120px] xl:max-w-[650px] overflow-hidden text-ellipsis">{{ source.act }}</span>
       </NTag>
       <div class="float-right">
-        <NButton secondary type="info" size="small" @click="showEditPromptPop(source)">编辑</NButton>
-        <NButton secondary class="ml-2" type="error" size="small" @click="delPrompt(source)">删除</NButton>
+        <NButton secondary type="info" size="small" @click="showEditPromptPop(source)">編輯</NButton>
+        <NButton secondary class="ml-2" type="error" size="small" @click="delPrompt(source)">刪除</NButton>
       </div>
     </template>
     <NEllipsis :tooltip="false" :line-clamp="2">{{ source.prompt }}</NEllipsis>
