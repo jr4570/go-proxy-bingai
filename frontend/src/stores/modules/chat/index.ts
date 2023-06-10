@@ -37,7 +37,7 @@ export const useChatStore = defineStore(
       },
       {
         baseUrl: '',
-        label: '自定义',
+        label: '自定義',
         isCus: true,
       },
     ]);
@@ -47,7 +47,7 @@ export const useChatStore = defineStore(
       if (!config.baseUrl) {
         return {
           isUsable: false,
-          errorMsg: '链接不可为空',
+          errorMsg: '鏈接不可為空',
         };
       }
       try {
@@ -63,9 +63,9 @@ export const useChatStore = defineStore(
           };
           ws.onerror = () => {
             clearTimeout(wsTimer);
-            reject(new Error(`聊天服务器 ${config.baseUrl} 连接失败`));
+            reject(new Error(`聊天服務器 ${config.baseUrl} 連接失敗`));
           };
-          ws.onclose = () => reject(new Error(`聊天服务器 ${config.baseUrl} 连接超时`));
+          ws.onclose = () => reject(new Error(`聊天服務器 ${config.baseUrl} 連接超時`));
         });
         return {
           isUsable: true,
