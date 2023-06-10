@@ -51,7 +51,7 @@ const initPwaOptions = (env: Record<string, string>) => {
     //   clientsClaim: true,
     //   skipWaiting: true,
     // },
-    // 取消注册服务工作进程
+    // 取消註冊服務工作進程
     // selfDestroying: true,
     registerType: 'autoUpdate',
   };
