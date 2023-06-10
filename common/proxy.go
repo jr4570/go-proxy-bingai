@@ -81,7 +81,7 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 		req.Header.Set("Referer", fmt.Sprintf("%s/search?q=Bing+AI", BING_URL.String()))
 		// }
 
-		// 同一会话尽量保持相同的随机IP
+		// 同一會話盡量保持相同的隨機IP
 		ckRandIP, _ := req.Cookie(RAND_IP_COOKIE_NAME)
 		if ckRandIP != nil && ckRandIP.Value != "" {
 			randIP = ckRandIP.Value
@@ -91,7 +91,7 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 		}
 		req.Header.Set("X-Forwarded-For", randIP)
 
-		// 未登录用户
+		// 未登錄用戶
 		ckUserToken, _ := req.Cookie(USER_TOKEN_COOKIE_NAME)
 		if ckUserToken == nil || ckUserToken.Value == "" {
 			randCKIndex, randCkVal := getRandCookie(req)
@@ -111,7 +111,7 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 		ua := req.UserAgent()
 		isMobile := strings.Contains(ua, "Mobile") || strings.Contains(ua, "Android")
 
-		// m pc 画图大小不一样
+		// m pc 畫圖大小不一樣
 		if isMobile {
 			req.Header.Set("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.7 Mobile/15E148 Safari/605.1.15 BingSapphire/1.0.410427012")
 		} else {
@@ -125,9 +125,9 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 		}
 
 		// reqHeaderByte, _ := json.Marshal(req.Header)
-		// log.Println("剩余请求头 ： ", string(reqHeaderByte))
+		// log.Println("剩餘請求頭 ： ", string(reqHeaderByte))
 	}
-	//改写返回信息
+	//改寫返回信息
 	modifyFunc := func(res *http.Response) error {
 		contentType := res.Header.Get("Content-Type")
 		if strings.Contains(contentType, "text/javascript") {
@@ -145,15 +145,15 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 			}
 		}
 
-		// 修改响应 cookie 域
+		// 修改響應 cookie 域
 		// resCookies := res.Header.Values("Set-Cookie")
 		// if len(resCookies) > 0 {
 		// 	for i, v := range resCookies {
 		// 		resCookies[i] = strings.ReplaceAll(strings.ReplaceAll(v, ".bing.com", originalHost), "bing.com", originalHost)
 		// 	}
 		// }
-
-		// 设置服务器 cookie 对应索引
+		
+		// 設置服務器 cookie 對應索引
 		if resCKRandIndex != "" {
 			ckRandIndex := &http.Cookie{
 				Name:  RAND_COOKIE_INDEX_NAME,
@@ -163,11 +163,11 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 			res.Header.Set("Set-Cookie", ckRandIndex.String())
 		}
 
-		// 删除 CSP
+		// 刪除 CSP
 		res.Header.Del("Content-Security-Policy-Report-Only")
 		res.Header.Del("Report-To")
 
-		// 删除重定向前缀域名 cn.bing.com www.bing.com 等
+		// 刪除重定向前綴域名 cn.bing.com www.bing.com 等
 		location := res.Header.Get("Location")
 		if location != "" {
 			for _, delLocationDomain := range DEL_LOCATION_DOMAINS {
@@ -175,13 +175,13 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 					res.Header.Set("Location", location[len(delLocationDomain):])
 					log.Println("Del Location Domain ：", location)
 					log.Println("RandIP : ", randIP)
-					// 换新ip
+					// 換新ip
 					randIP = GetRandomIP()
 				}
 			}
 		}
 
-		// 设置随机ip cookie
+		// 設置隨機ip cookie
 		ckRandIP := &http.Cookie{
 			Name:  RAND_IP_COOKIE_NAME,
 			Value: randIP,
@@ -199,19 +199,19 @@ func NewSingleHostReverseProxy(target *url.URL) *httputil.ReverseProxy {
 		return nil
 	}
 	errorHandler := func(res http.ResponseWriter, req *http.Request, err error) {
-		log.Println("代理异常 ：", err)
+		log.Println("代理異常 ：", err)
 		res.Write([]byte(err.Error()))
 	}
 
 	// tr := &http.Transport{
 	// 	TLSClientConfig: &tls.Config{
-	// 		// 如果只设置 InsecureSkipVerify: true对于这个问题不会有任何改变
+	// 		// 如果只設置 InsecureSkipVerify: true對於這個問題不會有任何改變
 	// 		InsecureSkipVerify: true,
 	// 		ClientAuth:         tls.NoClientCert,
 	// 	},
 	// }
 
-	// 代理请求   请求回来的内容   报错自动调用
+	// 代理請求   請求回來的內容   報錯自動調用
 	reverseProxy := &httputil.ReverseProxy{
 		Director:       director,
 		ModifyResponse: modifyFunc,
@@ -281,7 +281,7 @@ func replaceResBody(originalBody string, originalScheme string, originalHost str
 		}
 	}
 
-	// 对话暂时支持国内网络，而且 Vercel 还不支持 Websocket ，先不用
+	// 對話暫時支持國內網絡，而且 Vercel 還不支持 Websocket ，先不用
 	// if strings.Contains(modifiedBodyStr, BING_CHAT_DOMAIN) {
 	// 	modifiedBodyStr = strings.ReplaceAll(modifiedBodyStr, BING_CHAT_DOMAIN, originalDomain)
 	// }
@@ -305,9 +305,9 @@ func modifyGzipBody(res *http.Response, originalScheme string, originalHost stri
 	}
 	originalBody := string(bodyByte)
 	modifiedBodyStr := replaceResBody(originalBody, originalScheme, originalHost)
-	// 修改响应内容
+	// 修改響應內容
 	modifiedBody := []byte(modifiedBodyStr)
-	// gzip 压缩
+	// gzip 壓縮
 	var buf bytes.Buffer
 	writer := gzip.NewWriter(&buf)
 	defer writer.Close()
@@ -325,11 +325,11 @@ func modifyGzipBody(res *http.Response, originalScheme string, originalHost stri
 		return err
 	}
 
-	// 修改 Content-Length 头
+	// 修改 Content-Length 頭
 	res.Header.Set("Content-Length", strconv.Itoa(buf.Len()))
-	// 修改响应内容
+	// 修改響應內容
 	res.Body = io.NopCloser(&buf)
-
+	
 	return nil
 }
 
@@ -342,18 +342,18 @@ func modifyBrBody(res *http.Response, originalScheme string, originalHost string
 
 	modifiedBodyStr := replaceResBody(originalBody, originalScheme, originalHost)
 
-	// 修改响应内容
+	// 修改響應內容
 	modifiedBody := []byte(modifiedBodyStr)
-	// br 压缩
+	// br 壓縮
 	var buf bytes.Buffer
 	writer := brotli.NewWriter(&buf)
 	writer.Write(modifiedBody)
 	writer.Close()
 
-	// 修改 Content-Length 头
+	// 修改 Content-Length 頭
 	// res.ContentLength = int64(buf.Len())
 	res.Header.Set("Content-Length", strconv.Itoa(buf.Len()))
-	// 修改响应内容
+	// 修改響應內容
 	res.Body = io.NopCloser(bytes.NewReader(buf.Bytes()))
 
 	return nil
@@ -366,13 +366,13 @@ func modifyDefaultBody(res *http.Response, originalScheme string, originalHost s
 	}
 	originalBody := string(bodyByte)
 	modifiedBodyStr := replaceResBody(originalBody, originalScheme, originalHost)
-	// 修改响应内容
+	// 修改響應內容
 	modifiedBody := []byte(modifiedBodyStr)
 
-	// 修改 Content-Length 头
+	// 修改 Content-Length 頭
 	// res.ContentLength = int64(buf.Len())
 	res.Header.Set("Content-Length", strconv.Itoa(len(modifiedBody)))
-	// 修改响应内容
+	// 修改響應內容
 	res.Body = io.NopCloser(bytes.NewReader(modifiedBody))
 
 	return nil
